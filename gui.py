@@ -2,6 +2,7 @@ from tkinter import *
 import math
 from tkinter import messagebox
 
+
 class GUI:
     def __init__(self, root):
         self.output_string = StringVar()
@@ -18,17 +19,19 @@ class GUI:
         self.four_button = Button(root, text="4", height=3, width=7, command=lambda: self.change("4"), font='bold')
         self.five_button = Button(root, text="5", height=3, width=7, command=lambda: self.change("5"), font='bold')
         self.six_button = Button(root, text="6", height=3, width=7, command=lambda: self.change("6"), font='bold')
-        self.multiply_button = Button(root, text="*", height=3, width=7, command=lambda: self.operator('*'), font='bold')
+        self.multiply_button = Button(root, text="*", height=3, width=7, command=lambda: self.operator('*'),
+                                      font='bold')
         self.one_button = Button(root, text="1", height=3, width=7, command=lambda: self.change("1"), font='bold')
         self.two_button = Button(root, text="2", height=3, width=7, command=lambda: self.change("2"), font='bold')
         self.three_button = Button(root, text="3", height=3, width=7, command=lambda: self.change("3"), font='bold')
-        self.subtract_button = Button(root, text="-", height=3, width=7, command=lambda: self.operator('-'), font='bold')
+        self.subtract_button = Button(root, text="-", height=3, width=7, command=lambda: self.operator('-'),
+                                      font='bold')
         self.zero_button = Button(root, text="0", height=3, width=7, command=lambda: self.change("0"), font='bold')
         self.decimal_button = Button(root, text=".", height=3, width=7, command=lambda: self.change("."), font='bold')
         self.equal_button = Button(root, text="=", height=3, width=7, command=self.execute, font='bold')
         self.plus_button = Button(root, text="+", height=3, width=7, command=lambda: self.operator('+'), font='bold')
-        self.output_label = Label(root, textvariable=self.output_string, bg="white", fg="black", height=3, width=40, anchor="e",
-                                  font='bold')
+        self.output_label = Label(root, textvariable=self.output_string, bg="white", fg="black", height=3, width=40,
+                                  anchor="e", font='bold')
         self.clear_button = Button(root, text="CLR", height=3, width=7, command=self.clear, font='bold')
         self.power_button = Button(root, text="**", height=3, width=7, command=lambda: self.operator('**'), font='bold')
         self.sqrt_button = Button(root, text="Sqrt", height=3, width=7, command=self.calculate_sqrt, font='bold')
@@ -38,7 +41,6 @@ class GUI:
         self.sin_button = Button(root, text="Sin", height=3, width=7, command=self.calculate_sin, font='bold')
         self.delete_button = Button(root, text="Del", height=3, width=7, command=self.delete, font='bold')
 
-        # Grid layout for buttons
         self.seven_button.grid(row=1, column=0)
         self.eight_button.grid(row=1, column=1)
         self.nine_button.grid(row=1, column=2)
@@ -64,7 +66,6 @@ class GUI:
             self.execute()
         self.operator_string = item
         self.operator_clicked = True
-        # Optionally update output here
 
     def change(self, item):
         if not self.operator_clicked:
