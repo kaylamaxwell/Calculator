@@ -19,23 +19,20 @@ class GUI:
         self.four_button = Button(root, text="4", height=3, width=7, command=lambda: self.change("4"), font='bold')
         self.five_button = Button(root, text="5", height=3, width=7, command=lambda: self.change("5"), font='bold')
         self.six_button = Button(root, text="6", height=3, width=7, command=lambda: self.change("6"), font='bold')
-        self.multiply_button = Button(root, text="*", height=3, width=7, command=lambda: self.operator('*'),
-                                      font='bold')
+        self.multiply_button = Button(root, text="*", height=3, width=7, command=lambda: self.operator('*'),font='bold')
         self.one_button = Button(root, text="1", height=3, width=7, command=lambda: self.change("1"), font='bold')
         self.two_button = Button(root, text="2", height=3, width=7, command=lambda: self.change("2"), font='bold')
         self.three_button = Button(root, text="3", height=3, width=7, command=lambda: self.change("3"), font='bold')
-        self.subtract_button = Button(root, text="-", height=3, width=7, command=lambda: self.operator('-'),
-                                      font='bold')
+        self.subtract_button = Button(root, text="-", height=3, width=7, command=lambda: self.operator('-'), font='bold')
         self.zero_button = Button(root, text="0", height=3, width=7, command=lambda: self.change("0"), font='bold')
         self.decimal_button = Button(root, text=".", height=3, width=7, command=lambda: self.change("."), font='bold')
         self.equal_button = Button(root, text="=", height=3, width=7, command=self.execute, font='bold')
         self.plus_button = Button(root, text="+", height=3, width=7, command=lambda: self.operator('+'), font='bold')
-        self.output_label = Label(root, textvariable=self.output_string, bg="white", fg="black", height=3, width=40,
-                                  anchor="e", font='bold')
+        self.output_label = Label(root, textvariable=self.output_string, bg="white", fg="black", height=3, width=40, anchor="e", font='bold')
         self.clear_button = Button(root, text="CLR", height=3, width=7, command=self.clear, font='bold')
         self.power_button = Button(root, text="**", height=3, width=7, command=lambda: self.operator('**'), font='bold')
         self.sqrt_button = Button(root, text="Sqrt", height=3, width=7, command=self.calculate_sqrt, font='bold')
-        self.pi_button = Button(root, text="Pi", height=3, width=7, command=self.show_pi, font='bold')
+        self.pi_button = Button(root, text="Pi", height=3, width=7, command=self.pi, font='bold')
         self.tan_button = Button(root, text="Tan", height=3, width=7, command=self.calculate_tan, font='bold')
         self.cos_button = Button(root, text="Cos", height=3, width=7, command=self.calculate_cos, font='bold')
         self.sin_button = Button(root, text="Sin", height=3, width=7, command=self.calculate_sin, font='bold')
@@ -60,6 +57,12 @@ class GUI:
         self.output_label.grid(row=0, column=0, columnspan=4)
         self.clear_button.grid(row=5, column=3)
         self.delete_button.grid(row=5, column=2)
+        self.power_button.grid(row=5, column=0)
+        self.sqrt_button.grid(row=5, column=1)
+        self.pi_button.grid(row=6, column=0)
+        self.tan_button.grid(row=6, column=1)
+        self.cos_button.grid(row=6, column=2)
+        self.sin_button.grid(row=6, column=3)
 
     def operator(self, item):
         if self.second_number != '':
@@ -75,8 +78,13 @@ class GUI:
             self.second_number += item
             self.output_string.set(self.first_number + self.operator_string + self.second_number)
 
-    def show_pi(self):
-        self.output_string.set(str(math.pi))
+    def pi(self):
+        if not self.operator_clicked:
+            self.first_number += str(math.pi)
+            self.output_string.set(self.first_number)
+        else:
+            self.second_number += str(math.pi)
+            self.output_string.set(self.first_number + self.operator_string + self.second_number)
 
     def calculate_sqrt(self):
         result = math.sqrt(float(self.output_string.get()))
