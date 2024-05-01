@@ -28,7 +28,7 @@ class GUI:
         self.decimal_button = Button(root, text=".", height=3, width=7, command=lambda: self.change("."), font='bold')
         self.equal_button = Button(root, text="=", height=3, width=7, command=self.execute, font='bold')
         self.plus_button = Button(root, text="+", height=3, width=7, command=lambda: self.operator('+'), font='bold')
-        self.output_label = Label(root, textvariable=self.output_string, bg="white", fg="black", height=3, width=40, anchor="e", font='bold')
+        self.output_label = Label(root, textvariable=self.output_string, bg="light gray", fg="black", height=3, width=40, anchor="e", font=('bold', 24))
         self.clear_button = Button(root, text="CLR", height=3, width=7, command=self.clear, font='bold')
         self.power_button = Button(root, text="**", height=3, width=7, command=lambda: self.operator('**'), font='bold')
         self.sqrt_button = Button(root, text="Sqrt", height=3, width=7, command=self.calculate_sqrt, font='bold')
@@ -37,6 +37,7 @@ class GUI:
         self.cos_button = Button(root, text="Cos", height=3, width=7, command=self.calculate_cos, font='bold')
         self.sin_button = Button(root, text="Sin", height=3, width=7, command=self.calculate_sin, font='bold')
         self.delete_button = Button(root, text="Del", height=3, width=7, command=self.delete, font='bold')
+        self.plus_minus_button = Button(root, text="+/-", height=3, width=7, command=self.toggle_sign, font='bold')
 
         self.seven_button.grid(row=1, column=0)
         self.eight_button.grid(row=1, column=1)
@@ -64,19 +65,14 @@ class GUI:
         self.cos_button.grid(row=6, column=2)
         self.sin_button.grid(row=6, column=3)
 
+
     def operator(self, item):
         if self.second_number != '':
             self.execute()
         self.operator_string = item
         self.operator_clicked = True
 
-    def change(self, item):
-        if not self.operator_clicked:
-            self.first_number += item
-            self.output_string.set(self.first_number)
-        else:
-            self.second_number += item
-            self.output_string.set(self.first_number + self.operator_string + self.second_number)
+
 
     def pi(self):
         if not self.operator_clicked:
@@ -89,6 +85,14 @@ class GUI:
     def calculate_sqrt(self):
         result = math.sqrt(float(self.output_string.get()))
         self.output_string.set(result)
+
+    def change(self, item):
+        if not self.operator_clicked:
+            self.first_number += item
+            self.output_string.set(self.first_number)
+        else:
+            self.second_number += item
+            self.output_string.set(self.first_number + self.operator_string + self.second_number)
 
     def execute(self):
         first_float = float(self.first_number)
@@ -150,5 +154,10 @@ class GUI:
         new_value = current_value[:-1]
         if not new_value:
             new_value = "0"
-
         self.output_string.set(new_value)
+    def toggle_sign(self):
+        current_value = self.output_string.get()
+        if current_value.startswith('-'):
+            self.output_string.set(current_value[1:])  # Remove the '-' sign
+        else:
+            self.output_string.set('-' + current_value)  # Add a '-' sign
