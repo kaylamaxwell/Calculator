@@ -1,7 +1,11 @@
 from gui import *
 
 
-def main():
+def main() -> None:
+    """
+    Calls the calculator gui
+    :return: calculator app
+    """
     root = Tk()
     root.geometry("375x400")
     root.title("Calculator")
